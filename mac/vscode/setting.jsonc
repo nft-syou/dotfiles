@@ -1,0 +1,125 @@
+{
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "editor.renderWhitespace": "all",
+  "explorer.confirmDelete": false,
+  "breadcrumbs.enabled": true,
+  "editor.tabSize": 2,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "files.autoGuessEncoding": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true
+  },
+  "editor.colorDecorators": false, // カラーデコレーターを非表示
+  "editor.formatOnPaste": true, // ペースト時に自動でフォーマット
+  // "editor.formatOnSave": true, // ファイル保存時に自動でフォーマット
+  "editor.formatOnType": true, // 入力した行を自動でフォーマット
+  "editor.renderControlCharacters": true, // 制御文字を表示
+  "editor.renderLineHighlight": "all", // 選択行を行番号含めすべてハイライト
+  "editor.wordWrap": "on", // エディターの幅で折り返し
+  // "files.insertFinalNewline": true, // ファイルの保存時に末尾を改行
+  // "files.trimFinalNewlines": true, // ファイルの保存時に最終行以降をトリミング
+  // "files.trimTrailingWhitespace": true, // ファイルの保存時に行末の空白をトリミング
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false // Markdown のファイルは行末の空白をトリミングしない
+  },
+  "html.format.contentUnformatted": "pre, code, textarea, title, h1, h2, h3, h4, h5, h6, p", // タグ内の記述はフォーマットしない
+  "html.format.extraLiners": "", // head, body, /html タグの前に改行を入れない
+  "html.format.unformatted": null, // フレージング・コンテンツ（旧インライン要素のようなタグ）はフォーマットしない
+  "html.format.wrapLineLength": 0, // 行の文字数制限を無くし自動で改行させない
+  "window.openFoldersInNewWindow": "on", // 新規ワークスペースを別ウインドウで開く
+  "window.title": "${activeEditorMedium}${separator}${rootName}", // ウインドウ上部に表示する文字列の設定
+  "workbench.editor.labelFormat": "short", // タブに表示する文字列の設定
+  "workbench.editor.tabSizing": "shrink", // タブの表示設定
+  "workbench.startupEditor": "none",
+  "workbench.iconTheme": "vscode-icons", // Welcome Page を表示しない
+  "git.ignoreLegacyWarning": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+  "vsicons.dontShowNewVersionMessage": true,
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "python.languageServer": "Pylance",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "[html]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter.notebook.ipynb",
+    "*.svg": "default"
+  },
+  "solidity.compileUsingRemoteVersion": "latest",
+  "solidity.defaultCompiler": "localFile",
+  "[solidity]": {
+    "editor.defaultFormatter": "JuanBlanco.solidity"
+  },
+  "liveServer.settings.ignoreFiles": [
+    "**",
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts"
+  ],
+  "protoc": {
+    "options": [
+      "--proto_path=${workspaceFolder}/proto"
+    ]
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "genieai.enableConversationHistory": true,
+  "genieai.promptPrefix.findProblems": "次のコードの問題点を見つけてください",
+  //findProblemsは右クリックのメニューではFind Bugsに該当します
+  "genieai.promptPrefix.addTests": "次のコードにテストを追加してください",
+  "genieai.promptPrefix.optimize": "次のコードを最適化してください",
+  "genieai.promptPrefix.explain": "次のコードを説明してください",
+  "genieai.promptPrefix.addComments": "次のコードにJsDocに厳密なコメントを日本語で追加してください",
+  "genieai.promptPrefix.completeCode": "次のコードを完成させてください",
+  "genieai.openai.temperature": 0.5,
+  //返答を生成する際に使用する言葉の多様性がこの数値によって決定されます。
+  //プログラムコードの場合は、通常0.5~0.7の間の値が最適とされています。
+  //1に近いほど独創的な表現を用いるようになります。
+  "genieai.promptPrefix.customPrompt1": "次のコードを○○してください",
+  //よく使うプロンプトを入力してください。
+  "genieai.promptPrefix.customPrompt1-enabled": true,
+  "genieai.promptPrefix.customPrompt2": "次の文章を○○してください",
+  //コード以外にも選択した文章に対して使えます。
+  "genieai.promptPrefix.customPrompt2-enabled": true,
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "genieai.openai.maxTokens": 4096,
+  "editor.stickyScroll.enabled": false,
+  "gitlens.ai.generateCommitMessage.customInstructions": "あなたはプログラムコードレビューの専門家です。git commitメッセージをmarkdownは使わずにplaintext形式の日本語で作ってください。メッセージは、要約、修正内容、修正によりどのように変わるのかを回答して。修正内容は特に簡潔に回答してください。回答がmax_tokensを超えてしまう場合は文字数が収まるように要約してください。必要に応じて手を加えた関数名を書いてください。コードの変更箇所のみに言及し、コード変更の理由や効果は記述しないでください。",
+  "gitlens.ai.model": "openai:gpt-4o-mini",
+  "docker.extension.enableComposeLanguageServer": false,
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
+}
