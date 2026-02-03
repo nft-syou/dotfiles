@@ -1,5 +1,5 @@
 sencha() {
-  local cidfile
+  local container_name="sencha-cmd-$$"
   local colima_profile="amd"
   local started_colima=0
 
@@ -19,8 +19,11 @@ sencha() {
   local java_xmx="8192m"
   local java_opts="-Xms${java_xms} -Xmx${java_xmx}"
 
-  cidfile="$(mktemp -t sencha-cid.XXXXXX)"
-  rm -f "$cidfile" 2>/dev/null
+  # ---- 既存のsencha-cmdコンテナをクリーンアップ ----
+  docker ps -a --format '{{.Names}}' | grep '^sencha-cmd-' | while read -r name; do
+    docker stop "$name" >/dev/null 2>&1
+    docker rm -f "$name" >/dev/null 2>&1
+  done
 
   # ---- Colima start (必要な場合のみ) ----
   if ! colima status --profile "$colima_profile" 2>/dev/null | grep -q Running; then
@@ -37,12 +40,11 @@ sencha() {
   fi
 
   cleanup() {
-    # コンテナ後始末（cidfile がある場合のみ）
-    if [ -f "$cidfile" ]; then
-      local cid
-      cid="$(cat "$cidfile" 2>/dev/null)"
-      [ -n "$cid" ] && docker rm -f "$cid" >/dev/null 2>&1
-      rm -f "$cidfile" >/dev/null 2>&1
+    # コンテナ後始末（名前で管理）
+    if docker ps -a --format '{{.Names}}' | grep -q "^${container_name}$"; then
+      # タイムアウト1秒で停止を試みて、すぐに強制削除
+      docker stop -t 1 "$container_name" >/dev/null 2>&1
+      docker rm -f "$container_name" >/dev/null 2>&1
     fi
 
     # Colima stop（自分で起動した場合のみ）
@@ -54,13 +56,13 @@ sencha() {
 
   # 終了経路を全部拾う（成功/失敗/CTRL+C/kill）
   trap 'cleanup' EXIT
-  trap 'exit 130' INT
-  trap 'exit 143' TERM
+  trap 'cleanup; exit 130' INT
+  trap 'cleanup; exit 143' TERM
 
   docker run \
     --platform=linux/amd64 \
     --init \
-    --cidfile "$cidfile" \
+    --name "$container_name" \
     -e "JAVA_OPTS=${java_opts}" \
     -e "_JAVA_OPTIONS=${java_opts}" \
     -e "JAVA_TOOL_OPTIONS=${java_opts}" \
