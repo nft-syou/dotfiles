@@ -22,3 +22,12 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # ---- functions ----
 source ~/.config/shell/functions.sh
+
+# Added by Antigravity
+export PATH="/Users/user/.antigravity/antigravity/bin:$PATH"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<

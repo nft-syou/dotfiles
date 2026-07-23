@@ -8,7 +8,7 @@
   "editor.tabSize": 2,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "files.autoGuessEncoding": true,
-  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.ignoreTrimWhitespace": true,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
@@ -121,5 +121,10 @@
   "docker.extension.enableComposeLanguageServer": false,
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.selectedModel": "opus[1m]",
+  "extensions.autoUpdate": "off",
+  "workbench.colorTheme": "Dark Modern",
+  "workbench.secondarySideBar.showLabels": false
 }
