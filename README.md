@@ -7,7 +7,10 @@
 | OS | 状態 | ドキュメント |
 |---|---|---|
 | macOS | ✅ 対応済み | [mac/README.md](./mac/README.md) |
-| Windows | 🚧 未対応 | - |
+| Windows | 🚧 Claude Code 設定のみ対応 | [windows/README.md](./windows/README.md) |
+
+OS 共通の設定（Claude Code など）は [common/](./common/) に集約し、各 OS のセットアップ
+スクリプトから参照・リンクします。
 
 ## クイックスタート
 
@@ -31,23 +34,35 @@ source ~/.zshrc
 ```
 dotfiles/
 ├── README.md           # このファイル
-└── mac/                # macOS用設定
-    ├── README.md       # macOS詳細ドキュメント
-    ├── install.sh      # セットアップスクリプト
-    ├── brew/           # Homebrew設定
-    ├── git/            # Git設定
-    ├── kitty/          # Kittyターミナル設定
-    ├── shell/          # シェル関数
-    ├── vscode/         # VSCode設定
-    └── zsh/            # Zsh設定
+├── common/             # OS共通設定
+│   ├── claude/         # Claude Code (settings/skills/commands/agents/CLAUDE.md)
+│   └── git/            # Git設定 (.gitconfig / .gitignore_global)
+├── mac/                # macOS用設定
+│   ├── README.md       # macOS詳細ドキュメント
+│   ├── install.sh      # セットアップスクリプト
+│   ├── brew/           # Homebrew設定
+│   ├── claude/         # Claude Code インストールスクリプト
+│   ├── kitty/          # Kittyターミナル設定
+│   ├── shell/          # シェル関数
+│   ├── vscode/         # VSCode設定
+│   └── zsh/            # Zsh設定
+└── windows/            # Windows用設定
+    ├── README.md       # Windows詳細ドキュメント
+    ├── install.ps1     # セットアップスクリプト (Claude Code)
+    └── volta/          # Volta + Node.js インストールスクリプト
 ```
 
 ## 含まれる設定
 
+### OS 共通 (common/)
+
+- **Claude Code**: settings.json（プラグイン宣言）、CLAUDE.md、skills / commands / agents
+  - 詳細は [common/claude/README.md](./common/claude/README.md) を参照してください。
+- **Git**: LFS対応、グローバルignore（macOS / Windows 両対応）
+
 ### macOS
 
 - **Zsh**: 補完、Volta (Node.js)、カスタム関数
-- **Git**: LFS対応、グローバルignore
 - **Kitty**: ターミナル設定
 - **VSCode**: Copilot、GitLens、日本語化
 - **Shell Functions**: sencha (Docker + Colima)

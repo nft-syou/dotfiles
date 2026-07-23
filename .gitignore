@@ -1,1 +1,7 @@
 .history
+
+# マシン固有の Claude Code 上書き設定 (共有しない)
+common/claude/settings.local.json
+
+# セットアップ時のバックアップ
+*.backup

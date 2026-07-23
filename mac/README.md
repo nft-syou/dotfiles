@@ -13,9 +13,6 @@ mac/
 │   └── install-claude-code.sh
 ├── docker/
 │   └── init-docker-compose.sh
-├── git/
-│   ├── .gitconfig      # Git 設定
-│   └── .gitignore_global
 ├── install.sh          # シンボリックリンク作成スクリプト
 ├── kitty/
 │   └── kitty.conf      # Kitty ターミナル設定
@@ -48,11 +45,15 @@ mac/
 
 以下のファイルにシンボリックリンクが作成されます:
 - `~/.zshrc`
-- `~/.gitconfig`
-- `~/.gitignore_global`
+- `~/.gitconfig`（OS 共通 / [common/git](../common/git/)）
+- `~/.gitignore_global`（OS 共通 / [common/git](../common/git/)）
 - `~/.config/shell/functions.sh`
 - `~/.config/kitty/kitty.conf`
 - `~/Library/Application Support/Code/User/settings.json`
+- Claude Code（OS 共通 / [common/claude](../common/claude/)）:
+  - `~/.claude/settings.json`
+  - `~/.claude/CLAUDE.md`
+  - `~/.claude/skills`, `~/.claude/commands`, `~/.claude/agents`
 
 既存のファイルは `.backup` 拡張子で自動的にバックアップされます。
 

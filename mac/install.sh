@@ -3,6 +3,8 @@
 set -e
 
 MAC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$MAC_DIR/.." && pwd)"
+COMMON_DIR="$REPO_ROOT/common"
 
 echo "Setting up macOS dotfiles from $MAC_DIR"
 
@@ -32,10 +34,10 @@ link_file() {
 echo "Setting up Zsh..."
 link_file "$MAC_DIR/zsh/.zshrc" "$HOME/.zshrc"
 
-# Git
+# Git (OS 共通 / common/git)
 echo "Setting up Git..."
-link_file "$MAC_DIR/git/.gitconfig" "$HOME/.gitconfig"
-link_file "$MAC_DIR/git/.gitignore_global" "$HOME/.gitignore_global"
+link_file "$COMMON_DIR/git/.gitconfig" "$HOME/.gitconfig"
+link_file "$COMMON_DIR/git/.gitignore_global" "$HOME/.gitignore_global"
 
 # Shell functions
 echo "Setting up Shell functions..."
@@ -52,6 +54,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   mkdir -p "$VSCODE_USER_DIR"
   link_file "$MAC_DIR/vscode/setting.jsonc" "$VSCODE_USER_DIR/settings.json"
 fi
+
+# Claude Code (OS 共通 / common/claude)
+echo "Setting up Claude Code..."
+CLAUDE_DIR="$HOME/.claude"
+mkdir -p "$CLAUDE_DIR"
+link_file "$COMMON_DIR/claude/settings.json" "$CLAUDE_DIR/settings.json"
+link_file "$COMMON_DIR/claude/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
+link_file "$COMMON_DIR/claude/skills" "$CLAUDE_DIR/skills"
+link_file "$COMMON_DIR/claude/commands" "$CLAUDE_DIR/commands"
+link_file "$COMMON_DIR/claude/agents" "$CLAUDE_DIR/agents"
 
 echo ""
 echo "✓ Dotfiles setup complete!"

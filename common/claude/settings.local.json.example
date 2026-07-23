@@ -1,0 +1,10 @@
+{
+  "//": "コピーして ~/.claude/settings.local.json を作成するとマシン固有の設定を上書きできます。",
+  "//scope": "settings.local.json は各マシン固有・git 管理対象外。共有の settings.json より優先されます。",
+  "model": "opus[1m]",
+  "effortLevel": "max",
+  "permissions": {
+    "allow": [],
+    "deny": []
+  }
+}
