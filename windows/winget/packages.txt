@@ -1,0 +1,6 @@
+# winget パッケージ一覧 (Brewfile 相当)
+# 1行1パッケージID。"#" 始まりの行と空行は無視されます。
+# ID は `winget search <名前>` で確認できます。
+
+# --- 開発ツール ---
+Volta.Volta
