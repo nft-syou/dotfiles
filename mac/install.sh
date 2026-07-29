@@ -47,6 +47,10 @@ link_file "$MAC_DIR/shell/functions.sh" "$HOME/.config/shell/functions.sh"
 echo "Setting up Kitty..."
 link_file "$MAC_DIR/kitty/kitty.conf" "$HOME/.config/kitty/kitty.conf"
 
+# Tmux
+echo "Setting up Tmux..."
+link_file "$MAC_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
+
 # VSCode (macOS specific)
 if [[ "$OSTYPE" == "darwin"* ]]; then
   echo "Setting up VSCode..."
