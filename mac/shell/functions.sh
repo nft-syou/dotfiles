@@ -1,3 +1,7 @@
+t() {
+  tmux new-session -A -s "${1:-main}"
+}
+
 sencha() {
   local container_name="sencha-cmd-$$"
   local colima_profile="amd"
