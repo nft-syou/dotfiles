@@ -11,7 +11,6 @@ Amazon.AWSCLI
 Docker.DockerDesktop
 Microsoft.WSL
 Microsoft.VisualStudioCode
-Postman.Postman
 Anthropic.Claude
 GoLang.Go
 Rustlang.Rustup
@@ -26,7 +25,7 @@ Google.JapaneseIME
 
 # --- ブラウザ / コミュニケーション ---
 Brave.Brave
-Mozilla.Thunderbird.ja
+Mozilla.Thunderbird.ESR.ja
 RocketChat.RocketChat
 SlackTechnologies.Slack
 Discord.Discord
