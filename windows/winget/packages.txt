@@ -5,3 +5,33 @@
 # --- 開発ツール ---
 Microsoft.PowerShell
 Volta.Volta
+Git.Git
+GitHub.cli
+Amazon.AWSCLI
+Docker.DockerDesktop
+Microsoft.WSL
+Microsoft.VisualStudioCode
+Postman.Postman
+Anthropic.Claude
+GoLang.Go
+Rustlang.Rustup
+Python.Python.3.10
+
+# --- ユーティリティ ---
+Microsoft.PowerToys
+7zip.7zip
+FastCopy.FastCopy
+AgileBits.1Password
+Google.JapaneseIME
+
+# --- ブラウザ / コミュニケーション ---
+Brave.Brave
+Mozilla.Thunderbird.ja
+RocketChat.RocketChat
+SlackTechnologies.Slack
+Discord.Discord
+Tailscale.Tailscale
+
+# --- メディア ---
+VideoLAN.VLC
+DuongDieuPhap.ImageGlass
