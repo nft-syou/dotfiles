@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+#Requires -Version 7.0
 <#
 .SYNOPSIS
   packages.txt に列挙した winget パッケージを一括インストール (brew bundle 相当)
@@ -11,7 +11,7 @@
   packages.txt は 1 行 1 パッケージ ID。"#" 始まりの行と空行は無視されます。
 
 .EXAMPLE
-  powershell -ExecutionPolicy Bypass -File .\windows\winget\install-winget.ps1
+  pwsh -ExecutionPolicy Bypass -File .\windows\winget\install-winget.ps1
 #>
 
 $ErrorActionPreference = 'Stop'

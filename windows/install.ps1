@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+#Requires -Version 7.0
 <#
 .SYNOPSIS
   Windows 用 dotfiles セットアップ (OS 共通の Claude Code 設定をシンボリックリンク)
@@ -9,7 +9,7 @@
   (設定 > プライバシーとセキュリティ > 開発者向け > 開発者モード)
 
 .EXAMPLE
-  powershell -ExecutionPolicy Bypass -File .\windows\install.ps1
+  pwsh -ExecutionPolicy Bypass -File .\windows\install.ps1
 #>
 
 $ErrorActionPreference = 'Stop'

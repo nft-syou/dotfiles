@@ -5,6 +5,7 @@ Windows 用のセットアップスクリプト。
 ```
 windows/
 ├── README.md
+├── bootstrap.ps1            # 一括セットアップ (pwsh 導入 → 全スクリプト実行)
 ├── install.ps1              # Claude Code 設定のシンボリックリンク作成
 ├── winget/
 │   ├── install-winget.ps1   # packages.txt のパッケージを一括インストール
@@ -21,12 +22,23 @@ windows/
   設定 > プライバシーとセキュリティ > 開発者向け > 開発者モード をオン
 - または PowerShell を**管理者として実行**
 
-## セットアップ
+## セットアップ（一括）
+
+まっさらなマシンではこれ1本で完了します（プリインストールの Windows PowerShell 5.1 で動作）。
+PowerShell 7 (`pwsh`) が未導入なら winget で自動インストールし、以降のスクリプトを pwsh で実行します。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\windows\bootstrap.ps1
+```
+
+## 個別セットアップ
+
+各ステップを個別に実行する場合。`bootstrap.ps1` 以外のスクリプトは PowerShell 7 (`pwsh`) 専用です。
 
 ### 1. winget パッケージの一括インストール
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\windows\winget\install-winget.ps1
+pwsh -ExecutionPolicy Bypass -File .\windows\winget\install-winget.ps1
 ```
 
 [packages.txt](winget/packages.txt) に列挙したパッケージ（Volta など）を winget で
@@ -38,7 +50,7 @@ powershell -ExecutionPolicy Bypass -File .\windows\winget\install-winget.ps1
 ### 2. Node.js のセットアップ（Volta 経由）
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\windows\volta\install-volta.ps1
+pwsh -ExecutionPolicy Bypass -File .\windows\volta\install-volta.ps1
 ```
 
 Volta 経由で Node.js (LTS) と npm をセットアップします。
@@ -47,7 +59,7 @@ Context7 プラグイン（npx 経由の MCP サーバー）の動作にも必�
 ### 3. 設定ファイルのリンク（Git / Claude Code）
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\windows\install.ps1
+pwsh -ExecutionPolicy Bypass -File .\windows\install.ps1
 ```
 
 以下がリンクされます（既存ファイルは `.backup` で退避）。

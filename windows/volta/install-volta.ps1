@@ -1,4 +1,4 @@
-#Requires -Version 5.1
+#Requires -Version 7.0
 <#
 .SYNOPSIS
   Volta 経由で Node.js (LTS) をセットアップ
@@ -12,7 +12,7 @@
   Context7 プラグイン (npx 経由の MCP サーバー) の動作にも Node.js が必要です。
 
 .EXAMPLE
-  powershell -ExecutionPolicy Bypass -File .\windows\volta\install-volta.ps1
+  pwsh -ExecutionPolicy Bypass -File .\windows\volta\install-volta.ps1
 #>
 
 $ErrorActionPreference = 'Stop'

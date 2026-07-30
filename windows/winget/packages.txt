@@ -3,4 +3,5 @@
 # ID は `winget search <名前>` で確認できます。
 
 # --- 開発ツール ---
+Microsoft.PowerShell
 Volta.Volta

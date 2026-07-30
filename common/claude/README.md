@@ -69,6 +69,6 @@ common/claude/
 ## 反映方法
 
 - macOS: `./mac/install.sh`
-- Windows: `powershell -ExecutionPolicy Bypass -File .\windows\install.ps1`
+- Windows: `pwsh -ExecutionPolicy Bypass -File .\windows\install.ps1`
 
 既存ファイルは `.backup` 拡張子で自動退避されます。
