@@ -9,4 +9,11 @@
 	required = true
 [init]
 	defaultBranch = main
+[user]
+	name = nft-syou
+	email = 96684135+nft-syou@users.noreply.github.com
+# マシン固有の設定 (credential helper, safe.directory 等) は ~/.gitconfig.local へ。
+# include は後勝ちなので共有設定を上書きできる。
+[include]
+	path = ~/.gitconfig.local
 
