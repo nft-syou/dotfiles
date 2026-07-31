@@ -1,8 +1,14 @@
 {
   "model": "claude-fable-5[1m]",
   "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "frontend-design@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "toolcall-recover@nam-tech-studio": true,
+    "material-3@material-3-skill": true,
+    "codex@openai-codex": true,
+    "grok-build@xai-grok-build": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -10,6 +16,35 @@
         "source": "github",
         "repo": "anthropics/claude-plugins-public"
       }
+    },
+    "nam-tech-studio": {
+      "source": {
+        "source": "github",
+        "repo": "nam-tech-studio/toolcall-recover"
+      }
+    },
+    "material-3-skill": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/hamen/material-3-skill.git"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/openai/codex-plugin-cc.git"
+      }
+    },
+    "xai-grok-build": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/xai-org/grok-build-plugin-cc.git"
+      }
     }
-  }
+  },
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "latest",
+  "skipWorkflowUsageWarning": true,
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
 }
