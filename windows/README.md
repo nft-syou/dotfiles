@@ -10,8 +10,10 @@ windows/
 ├── winget/
 │   ├── install-winget.ps1   # packages.txt のパッケージを一括インストール
 │   └── packages.txt         # winget パッケージ ID 一覧 (Brewfile 相当)
-└── volta/
-    └── install-volta.ps1    # Volta 経由で Node.js (LTS) をセットアップ
+├── volta/
+│   └── install-volta.ps1    # Volta 経由で Node.js (LTS) をセットアップ
+└── scripts/
+    └── claude-profile.ps1   # Claude Desktop をプロファイル別に起動
 ```
 
 ## 前提
@@ -73,6 +75,8 @@ pwsh -ExecutionPolicy Bypass -File .\windows\install.ps1
   - `%USERPROFILE%\.claude\skills`
   - `%USERPROFILE%\.claude\commands`
   - `%USERPROFILE%\.claude\agents`
+- ユーティリティスクリプト（Windows 固有 / [scripts](scripts/)）:
+  - `%USERPROFILE%\Scripts\claude-profile.ps1`（Claude Desktop のプロファイル別起動）
 
 ## 確認
 

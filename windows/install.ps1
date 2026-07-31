@@ -78,6 +78,12 @@ Link-File (Join-Path $ClaudeCommon 'skills')         (Join-Path $ClaudeDir 'skil
 Link-File (Join-Path $ClaudeCommon 'commands')       (Join-Path $ClaudeDir 'commands')
 Link-File (Join-Path $ClaudeCommon 'agents')         (Join-Path $ClaudeDir 'agents')
 
+# ユーティリティスクリプト (Windows 固有 / windows/scripts)
+Write-Host "Setting up Scripts..."
+$ScriptsDir = Join-Path $env:USERPROFILE 'Scripts'
+New-Item -ItemType Directory -Path $ScriptsDir -Force | Out-Null
+Link-File (Join-Path $WindowsDir 'scripts\claude-profile.ps1') (Join-Path $ScriptsDir 'claude-profile.ps1')
+
 Write-Host ""
 Write-Host "✓ Dotfiles setup complete!"
 Write-Host ""
