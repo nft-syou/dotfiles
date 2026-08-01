@@ -46,5 +46,6 @@
   "autoUpdatesChannel": "latest",
   "skipWorkflowUsageWarning": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "switchModelsOnFlag": false
 }
