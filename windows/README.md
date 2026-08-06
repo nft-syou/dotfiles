@@ -12,6 +12,8 @@ windows/
 │   └── packages.txt         # winget パッケージ ID 一覧 (Brewfile 相当)
 ├── volta/
 │   └── install-volta.ps1    # Volta 経由で Node.js (LTS) をセットアップ
+├── powershell/
+│   └── Microsoft.PowerShell_profile.ps1  # pwsh 7 の $PROFILE (safe-chain 統合行を含む)
 └── scripts/
     └── claude-profile.ps1   # Claude Desktop をプロファイル別に起動
 ```
@@ -77,6 +79,22 @@ pwsh -ExecutionPolicy Bypass -File .\windows\install.ps1
   - `%USERPROFILE%\.claude\agents`
 - ユーティリティスクリプト（Windows 固有 / [scripts](scripts/)）:
   - `%USERPROFILE%\Scripts\claude-profile.ps1`（Claude Desktop のプロファイル別起動）
+- PowerShell 7 プロファイル（Windows 固有 / [powershell](powershell/)）:
+  - `$PROFILE`（`Documents\PowerShell\Microsoft.PowerShell_profile.ps1`）
+
+### 4. Safe Chain（npm マルウェア対策）
+
+[Aikido Safe Chain](https://github.com/AikidoSec/safe-chain) で npm / npx / yarn / pnpm 等の
+パッケージ取得をマルウェアスキャン経由にします。
+[公式 README](https://github.com/AikidoSec/safe-chain#readme) の Windows 用ワンライナー
+（SHA256 検証付き・スタンドアロンバイナリを `~\.safe-chain\` に設置）を実行してください。
+
+- インストーラが `$PROFILE`（上記 3. で dotfiles 管理下にシンボリックリンク済み）へ
+  統合行を追記します。追記行は原文のまま残すこと（アンインストーラが認識するため）。
+- **Volta と共存可能**: コマンドはシェル関数でラップされ、実体は PATH 上の Volta シム
+  経由で実行されます。旧来の `npm install -g @aikidosec/safe-chain` 方式は Volta の
+  シムと衝突する（[#283](https://github.com/AikidoSec/safe-chain/issues/283)）ため使わないこと。
+- 動作確認: `npm safe-chain-verify` が成功し、`npm install safe-chain-test` がブロックされれば OK。
 
 ## 確認
 

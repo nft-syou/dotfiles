@@ -7,7 +7,7 @@
 | OS | 状態 | ドキュメント |
 |---|---|---|
 | macOS | ✅ 対応済み | [mac/README.md](./mac/README.md) |
-| Windows | 🚧 Claude Code 設定のみ対応 | [windows/README.md](./windows/README.md) |
+| Windows | 🚧 部分対応 (winget / Volta / Claude Code / PowerShell プロファイル) | [windows/README.md](./windows/README.md) |
 
 OS 共通の設定（Claude Code など）は [common/](./common/) に集約し、各 OS のセットアップ
 スクリプトから参照・リンクします。
@@ -48,8 +48,12 @@ dotfiles/
 │   └── zsh/            # Zsh設定
 └── windows/            # Windows用設定
     ├── README.md       # Windows詳細ドキュメント
-    ├── install.ps1     # セットアップスクリプト (Claude Code)
-    └── volta/          # Volta + Node.js インストールスクリプト
+    ├── bootstrap.ps1   # 一括セットアップ (pwsh 導入 → 全スクリプト実行)
+    ├── install.ps1     # シンボリックリンク作成 (Git / Claude Code / PowerShell プロファイル)
+    ├── winget/         # winget パッケージ一括インストール
+    ├── volta/          # Volta + Node.js インストールスクリプト
+    ├── powershell/     # PowerShell 7 プロファイル ($PROFILE)
+    └── scripts/        # ユーティリティ (claude-profile.ps1)
 ```
 
 ## 含まれる設定

@@ -84,6 +84,13 @@ $ScriptsDir = Join-Path $env:USERPROFILE 'Scripts'
 New-Item -ItemType Directory -Path $ScriptsDir -Force | Out-Null
 Link-File (Join-Path $WindowsDir 'scripts\claude-profile.ps1') (Join-Path $ScriptsDir 'claude-profile.ps1')
 
+# PowerShell 7 プロファイル (Windows 固有 / windows/powershell)
+Write-Host "Setting up PowerShell profile..."
+# pwsh 7 の $PROFILE は MyDocuments 配下 (フォルダリダイレクト環境も考慮し GetFolderPath で解決)
+$PwshProfileDir = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'PowerShell'
+New-Item -ItemType Directory -Path $PwshProfileDir -Force | Out-Null
+Link-File (Join-Path $WindowsDir 'powershell\Microsoft.PowerShell_profile.ps1') (Join-Path $PwshProfileDir 'Microsoft.PowerShell_profile.ps1')
+
 Write-Host ""
 Write-Host "✓ Dotfiles setup complete!"
 Write-Host ""
