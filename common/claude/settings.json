@@ -45,7 +45,7 @@
   "alwaysThinkingEnabled": true,
   "autoUpdatesChannel": "latest",
   "skipWorkflowUsageWarning": true,
+  "switchModelsOnFlag": false,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
-  "switchModelsOnFlag": false
+  "agentPushNotifEnabled": true
 }
