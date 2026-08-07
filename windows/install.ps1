@@ -85,11 +85,32 @@ New-Item -ItemType Directory -Path $ScriptsDir -Force | Out-Null
 Link-File (Join-Path $WindowsDir 'scripts\claude-profile.ps1') (Join-Path $ScriptsDir 'claude-profile.ps1')
 
 # PowerShell 7 プロファイル (Windows 固有 / windows/powershell)
+# $PROFILE 実体はシンボリックリンクではなくマシンローカルのスタブにする。
+# safe-chain 等のインストーラは $PROFILE に絶対パスの行を追記するため、リンクにすると
+# 環境依存の行がリポジトリに混入してしまう。スタブで受けて repo 側プロファイルを dot-source する。
 Write-Host "Setting up PowerShell profile..."
 # pwsh 7 の $PROFILE は MyDocuments 配下 (フォルダリダイレクト環境も考慮し GetFolderPath で解決)
 $PwshProfileDir = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'PowerShell'
 New-Item -ItemType Directory -Path $PwshProfileDir -Force | Out-Null
-Link-File (Join-Path $WindowsDir 'powershell\Microsoft.PowerShell_profile.ps1') (Join-Path $PwshProfileDir 'Microsoft.PowerShell_profile.ps1')
+$PwshProfilePath = Join-Path $PwshProfileDir 'Microsoft.PowerShell_profile.ps1'
+$RepoProfile     = Join-Path $WindowsDir 'powershell\profile.ps1'
+$ProfileMarker   = '# dotfiles-managed profile'
+$SourceLine      = "if (Test-Path `"$RepoProfile`") { . `"$RepoProfile`" } $ProfileMarker"
+
+# 旧方式 (シンボリックリンク) からの移行: リンクなら外してスタブを作り直す
+$existing = Get-Item -LiteralPath $PwshProfilePath -ErrorAction SilentlyContinue
+if ($null -ne $existing -and $existing.LinkType -eq 'SymbolicLink') {
+  Write-Host "  Removing legacy symlink: $PwshProfilePath"
+  Remove-Item -LiteralPath $PwshProfilePath -Force
+}
+
+# マーカー行を毎回貼り直す (repo パス変更に追従)。インストーラ追記行などはそのまま保持
+$stubLines = @()
+if (Test-Path -LiteralPath $PwshProfilePath) {
+  $stubLines = @(Get-Content -LiteralPath $PwshProfilePath | Where-Object { $_ -notlike "*$ProfileMarker*" })
+}
+Write-Host "  Ensuring stub sources: $RepoProfile"
+Set-Content -LiteralPath $PwshProfilePath -Value ($stubLines + $SourceLine)
 
 Write-Host ""
 Write-Host "✓ Dotfiles setup complete!"

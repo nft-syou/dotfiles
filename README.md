@@ -49,10 +49,10 @@ dotfiles/
 └── windows/            # Windows用設定
     ├── README.md       # Windows詳細ドキュメント
     ├── bootstrap.ps1   # 一括セットアップ (pwsh 導入 → 全スクリプト実行)
-    ├── install.ps1     # シンボリックリンク作成 (Git / Claude Code / PowerShell プロファイル)
+    ├── install.ps1     # セットアップ (シンボリックリンク / $PROFILE スタブ生成)
     ├── winget/         # winget パッケージ一括インストール
     ├── volta/          # Volta + Node.js インストールスクリプト
-    ├── powershell/     # PowerShell 7 プロファイル ($PROFILE)
+    ├── powershell/     # PowerShell 7 プロファイル本体
     └── scripts/        # ユーティリティ (claude-profile.ps1)
 ```
 
