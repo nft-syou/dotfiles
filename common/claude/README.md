@@ -16,8 +16,11 @@ common/claude/
 └── agents/                       # サブエージェント定義
 ```
 
-> **model / effortLevel は共有しません。** これらはマシン固有として
-> `~/.claude/settings.local.json` に置きます（git 管理外・共有 settings.json より優先）。
+> **注意: ユーザーレベルの `~/.claude/settings.local.json` は Claude Code に読まれません。**
+> `settings.local.json` が効くのはプロジェクト単位（`<repo>/.claude/settings.local.json`）だけです
+> （公式の優先順位: 管理設定 > `--settings` > プロジェクト local > プロジェクト共有 > ユーザー `~/.claude/settings.json`）。
+> そのため model / effortLevel も `settings.json` に置いて共有しています。
+> マシン固有にしたいものは下記の「git clean フィルタ」で除外します。
 
 ## リンク先 (シンボリックリンク)
 
@@ -54,17 +57,31 @@ common/claude/
   claude plugin install context7@claude-plugins-official
   ```
 
-## マシン固有の設定 (共有しないもの)
+## マシン固有の設定 (共有しないもの) — git clean フィルタ
 
-- `~/.claude/settings.local.json` … 各マシン固有の上書き。共有 `settings.json` より優先。git 管理外。
-  - **model / effortLevel** はここに置きます（マシンごとに変えられるように）。
-  - 雛形: `settings.local.json.example` をコピーして作成。
+Orca は起動時に `~/.claude/settings.json`（＝共有シンボリックリンク）へ、そのマシンのフルパスを
+直書きした `hooks`（全イベント）と `statusLine` を注入します。これを他 OS に配ると壊れるので、
+**git の clean フィルタでコミット時にだけ剥がします**。作業ツリーの実体はそのままなので Orca は動き続けます。
+
+- `.gitattributes` … `common/claude/settings.json filter=claude-settings`
+- `strip-orca.mjs` … フィルタ本体。stdin の JSON から次だけを落として stdout へ返す
+  - `hooks` のうち command が `.orca/agent-hooks/` を指すグループ
+  - `statusLine` のうち command が `ORCA_` 環境変数を参照するもの
+  - JSON として読めない入力は無加工で返す（壊さない）
+- 登録は各 OS の install スクリプトが行う（`git config filter.claude-settings.clean 'node common/claude/strip-orca.mjs'`）。
+  手動なら同コマンドをリポジトリ直下で実行。
+
+**共通化したい hooks はそのまま `settings.json` に書けば通ります**（Orca 由来でなければフィルタは触らない）。
+ただし Windows のフルパスは書かず、`~/.claude/hooks/xxx.sh` や `node ~/.claude/hooks/xxx.mjs` のように
+ホーム相対で書き、スクリプト本体は `common/claude/hooks/` に置いてリンクしてください。
+
+> `git status` は作業ツリーの mtime 変化で一瞬「変更あり」に見えることがありますが、
+> `git diff` はフィルタ後で比較するため差分なしになります。
+
+- `settings.local.json.example` … 旧方式の雛形。ユーザーレベルでは読まれないため、プロジェクト単位
+  （`<repo>/.claude/settings.local.json`）で使う場合の参考としてのみ残しています。
 - `sessions/`, `projects/`, `cache/`, `history.jsonl` などのランタイム状態は共有しません。
-
-> **注意:** アプリ上で `/model` を実行してモデルを切り替えると、Claude Code は
-> ユーザースコープの `settings.json`（＝共有シンボリックリンク）に書き込みます。
-> その場合 model が共有ファイルに追記され git 差分として現れるので、`git checkout` で
-> 破棄するか、必要なら意図的に共有側へ移してください。
+- `cleanupPeriodDays` は 36500 に設定済み（セッション記録を実質無期限で保持）。
 
 ## 反映方法
 

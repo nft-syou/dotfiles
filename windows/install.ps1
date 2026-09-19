@@ -112,6 +112,11 @@ if (Test-Path -LiteralPath $PwshProfilePath) {
 Write-Host "  Ensuring stub sources: $RepoProfile"
 Set-Content -LiteralPath $PwshProfilePath -Value ($stubLines + $SourceLine)
 
+# git clean フィルタ: Orca が settings.json に注入する hooks/statusLine をコミットから外す (.gitattributes 参照)
+Write-Host "Registering git clean filter for common/claude/settings.json..."
+git -C $RepoRoot config filter.claude-settings.clean 'node common/claude/strip-orca.mjs'
+git -C $RepoRoot config filter.claude-settings.required true
+
 Write-Host ""
 Write-Host "✓ Dotfiles setup complete!"
 Write-Host ""

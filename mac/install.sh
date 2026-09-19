@@ -69,6 +69,11 @@ link_file "$COMMON_DIR/claude/skills" "$CLAUDE_DIR/skills"
 link_file "$COMMON_DIR/claude/commands" "$CLAUDE_DIR/commands"
 link_file "$COMMON_DIR/claude/agents" "$CLAUDE_DIR/agents"
 
+# git clean フィルタ: Orca が settings.json に注入する hooks/statusLine をコミットから外す (.gitattributes 参照)
+echo "Registering git clean filter for common/claude/settings.json..."
+git -C "$REPO_ROOT" config filter.claude-settings.clean 'node common/claude/strip-orca.mjs'
+git -C "$REPO_ROOT" config filter.claude-settings.required true
+
 echo ""
 echo "✓ Dotfiles setup complete!"
 echo ""

@@ -1,0 +1,2 @@
+# Orca が注入する hooks/statusLine をコミットから外す (install.ps1 / install.sh が filter を登録)
+common/claude/settings.json filter=claude-settings
